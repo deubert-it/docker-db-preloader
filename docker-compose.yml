@@ -9,4 +9,4 @@ services:
       MYSQL_USER: ${DATABASE_USER}
       MYSQL_PASSWORD: ${DATABASE_PASSWORD}
     volumes:
-    - sql:/docker-entrypoint-initdb.d/
+    - ./sql:/docker-entrypoint-initdb.d/
