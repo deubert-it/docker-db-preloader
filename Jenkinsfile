@@ -14,15 +14,15 @@ pipeline {
             }
         }
 
-        stage('Build docker env') {
-            steps {
-                sh 'docker-compose -f docker-compose.yml build'
-            }
-        }
-
         stage('Set Dotenv config') {
             steps {
                 sh 'cp .env.dist .env'
+            }
+        }
+
+        stage('Build docker env') {
+            steps {
+                sh 'docker-compose -f docker-compose.yml build'
             }
         }
 
