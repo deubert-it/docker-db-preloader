@@ -9,7 +9,7 @@ pipeline {
                     doGenerateSubmoduleConfigurations: false,
                     extensions: [],
                     submoduleCfg: [],
-                    userRemoteConfigs: [[credentialsId: 'ssh-jenkins-master', url: 'https://kdeubert@stash.deubert.it/scm/doc/db-databuilder.git']]
+                    userRemoteConfigs: [[credentialsId: 'ssh-jenkins-master', url: 'ssh://git@stash.deubert.it:7999/doc/db-databuilder.git']]
                 ])
             }
         }
