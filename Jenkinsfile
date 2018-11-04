@@ -20,29 +20,31 @@ pipeline {
             }
         }
 
-        stage('Build docker env') {
+        stage('Build docker env 01') {
             steps {
-                sh 'docker-compose -f docker-compose.yml build'
+                sh 'docker-compose -f docker-compose.01-import.yml build'
             }
         }
 
-        stage('Start docker env') {
+        stage('Start docker env 01') {
             steps {
-                sh 'docker-compose -f docker-compose.yml -p ${JOB_NAME} up -d'
+                sh 'docker-compose -f docker-compose.01-import.yml -p ${JOB_NAME}_01 up -d'
             }
         }
 
-        stage('Validate output') {
+        stage('Validate output 01') {
             steps {
                 echo "not implemented yet"
             }
         }
 
-        stage('Stop docker env') {
+        stage('Stop docker env 01') {
             steps {
-                sh 'docker-compose -f docker-compose.yml -p ${JOB_NAME} stop'
+                sh 'docker-compose -f docker-compose.01-import.yml -p ${JOB_NAME}_01 stop'
             }
         }
+
+
 
         stage('Push data container to registry') {
             steps {
@@ -53,7 +55,7 @@ pipeline {
 
     post {
         failure {
-            sh 'docker-compose -f docker-compose.yml -p ${JOB_NAME} stop'
+            sh 'docker-compose -f docker-compose.01-import.yml -p ${JOB_NAME}_01 stop'
             //mail to: support@deubert.it, subject: 'The Pipeline failed :('
         }
     }
