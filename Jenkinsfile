@@ -41,7 +41,7 @@ pipeline {
 
         stage('Wait for import completion') {
             steps {
-                sh '/bin/bash wait-for-it.sh --timeout=300 --host=db --port=3306'
+                sh 'chmod +x ${WORKSPACE}/wait-for-it.sh && /bin/bash ${WORKSPACE}/wait-for-it.sh --timeout=300 --host=db --port=3306'
             }
         }
 
