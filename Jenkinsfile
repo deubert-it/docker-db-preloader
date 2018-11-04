@@ -7,7 +7,7 @@ pipeline {
                     $class: 'GitSCM',
                     branches: [[name: '*/master']],
                     doGenerateSubmoduleConfigurations: false,
-                    extensions: [],
+                    extensions: [[$class: 'CleanBeforeCheckout']],
                     submoduleCfg: [],
                     userRemoteConfigs: [[credentialsId: 'ssh-jenkins-master', url: 'ssh://git@stash.deubert.it:7999/doc/db-databuilder.git']]
                 ])
@@ -17,6 +17,13 @@ pipeline {
         stage('Set Dotenv config') {
             steps {
                 sh 'cp .env.dist .env'
+            }
+        }
+
+        stage('Clean data dir') {
+            steps {
+                sh 'rm -rf data'
+                sh 'mkdir data'
             }
         }
 
