@@ -43,6 +43,7 @@ pipeline {
             steps {
                 sh 'chmod +x ${WORKSPACE}/wait-for-it.sh'
                 sh 'docker-compose -f docker-compose.01-import.yml -p ${JOB_NAME} exec -T db /bin/bash /tmp/wait-for-it.sh --timeout=30 --host=localhost --port=3306'
+                sh 'docker-compose -f docker-compose.01-import.yml -p ${JOB_NAME} exec -T db chmod -R 0777 /var/lib/mysql'
             }
         }
 
