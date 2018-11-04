@@ -39,6 +39,12 @@ pipeline {
             }
         }
 
+        stage('Wait for import completion') {
+            steps {
+                sh '/bin/bash wait-for-it.sh --timeout=300 --host=db --port=3306'
+            }
+        }
+
         stage('Validate output') {
             steps {
                 echo "not implemented yet"
