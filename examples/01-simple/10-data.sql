@@ -1,0 +1,1 @@
+INSERT INTO `test01`.`test01table` (`id`, `a`, `b`, `c`) VALUES (NULL, '10', '10', '10'), (NULL, '20', '20', '20');
