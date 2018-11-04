@@ -41,7 +41,8 @@ pipeline {
 
         stage('Wait for import completion') {
             steps {
-                sh 'chmod +x ${WORKSPACE}/wait-for-it.sh && /bin/bash ${WORKSPACE}/wait-for-it.sh --timeout=300 --host=db --port=3306'
+                sh 'chmod +x ${WORKSPACE}/wait-for-it.sh'
+                sh 'docker-compose -f docker-compose.01-import.yml exec db /bin/bash /tmp/wait-for-it.sh --timeout=30 --host=localhost --port=3306'
             }
         }
 

@@ -11,3 +11,4 @@ services:
     volumes:
     - ./sql:/docker-entrypoint-initdb.d/
     - ./data:/var/lib/mysql
+    - ./wait-for-it.sh:/tmp/wait-for-it.sh
