@@ -44,8 +44,6 @@ pipeline {
             }
         }
 
-
-
         stage('Push data container to registry') {
             steps {
                 echo "not implemented yet"
