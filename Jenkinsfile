@@ -1,15 +1,6 @@
 pipeline {
     agent any
     stages {
-        stage('Prepare data dir') {
-            steps {
-                sh 'stat data'
-                sh 'rm -rf data'
-                sh 'mkdir data'
-            }
-        }
-
-
         stage('Preparation') {
             steps {
                 checkout([
@@ -26,13 +17,6 @@ pipeline {
         stage('Set Dotenv config') {
             steps {
                 sh 'cp .env.dist .env'
-            }
-        }
-
-        stage('Clean data dir') {
-            steps {
-                sh 'rm -rf data'
-                sh 'mkdir data'
             }
         }
 
@@ -76,6 +60,9 @@ pipeline {
     }
 
     post {
+        always {
+            sh 'rm -rf data'
+        }
         failure {
             sh 'docker-compose -f docker-compose.01-import.yml -p ${JOB_NAME} stop'
             //mail to: support@deubert.it, subject: 'The Pipeline failed :('
