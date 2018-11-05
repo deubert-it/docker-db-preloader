@@ -34,6 +34,12 @@ pipeline {
             }
         }
 
+        stage('Validate docker env') {
+            steps {
+                sh 'docker ps'
+            }
+        }
+
         stage('Wait for import completion') {
             steps {
                 sh 'chmod +x ${WORKSPACE}/wait-for-it.sh'
