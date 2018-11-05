@@ -1,6 +1,15 @@
 pipeline {
     agent any
     stages {
+        stage('Prepare data dir') {
+            steps {
+                sh 'stat data'
+                sh 'rm -rf data'
+                sh 'mkdir data'
+            }
+        }
+
+
         stage('Preparation') {
             steps {
                 checkout([
