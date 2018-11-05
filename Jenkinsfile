@@ -62,12 +62,13 @@ pipeline {
     }
 
     post {
-        always {
-            sh 'rm -rf data'
-        }
         failure {
+            sh 'docker-compose -f docker-compose.01-import.yml -p ${JOB_NAME} exec -T db chmod -R 0777 /var/lib/mysql'
             sh 'docker-compose -f docker-compose.01-import.yml -p ${JOB_NAME} stop'
             //mail to: support@deubert.it, subject: 'The Pipeline failed :('
+        }
+        always {
+            sh 'rm -rf data'
         }
     }
 }
