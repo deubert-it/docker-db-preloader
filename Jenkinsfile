@@ -36,7 +36,7 @@ pipeline {
 
         stage('Validate docker env') {
             steps {
-                sh 'docker ps'
+                sh 'docker ps | grep "${JOB_NAME}_db"'
             }
         }
 
