@@ -11,6 +11,8 @@ pipeline {
                     submoduleCfg: [],
                     userRemoteConfigs: [[credentialsId: 'ssh-jenkins-master', url: 'ssh://git@stash.deubert.it:7999/doc/db-databuilder.git']]
                 ])
+
+                sh 'mkdir ${WORKSPACE}/data && chmod 0777 ${WORKSPACE}/data'
             }
         }
 
