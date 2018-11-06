@@ -73,7 +73,7 @@ pipeline {
                 sh 'rm -rf ${WORKSPACE}/etc/data'
                 sh 'mv ${WORKSPACE}/data ${WORKSPACE}/etc/'
 
-                sh 'cd ${WORKSPACE}/etc && docker build --rm --label db-data-01'
+                sh 'docker-compose -f docker-compose.02-build.yml -p ${JOB_NAME}_build build'
             }
         }
 
