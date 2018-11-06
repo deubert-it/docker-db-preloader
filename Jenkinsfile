@@ -53,8 +53,9 @@ pipeline {
 
         stage('Validate output') {
             steps {
-                sh 'rm -f ${WORKSPACE}/examples/01-simple/export/fulldump.sql'
-                sh 'docker-compose -f docker-compose.01-import.yml -p ${JOB_NAME} exec -T db "sh -c exec mysqldump --all-databases -uroot -proot" > ${WORKSPACE}/examples/01-simple/export/fulldump.sql'
+                sh 'rm -f ${WORKSPACE}/examples/01-simple/export/*.sql'
+                sh 'docker-compose -f docker-compose.01-import.yml -p ${JOB_NAME} exec -T db "/usr/bin/mysqldump -uroot -proot --skip-dump-date mysql user" > ${WORKSPACE}/examples/01-simple/export/mysql-users.sql'
+                sh 'docker-compose -f docker-compose.01-import.yml -p ${JOB_NAME} exec -T db "/usr/bin/mysqldump -uroot -proot --skip-dump-date test01" > ${WORKSPACE}/examples/01-simple/export/test01.sql'
             }
         }
 
