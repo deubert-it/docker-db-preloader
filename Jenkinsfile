@@ -56,12 +56,21 @@ pipeline {
                 sh 'rm -f ${WORKSPACE}/examples/01-simple/export/*.sql'
                 sh 'docker-compose -f docker-compose.01-import.yml -p ${JOB_NAME} exec -T db sh -c "/usr/bin/mysqldump -uroot -proot --skip-dump-date mysql user" > ${WORKSPACE}/examples/01-simple/export/mysql-users.sql'
                 sh 'docker-compose -f docker-compose.01-import.yml -p ${JOB_NAME} exec -T db sh -c "/usr/bin/mysqldump -uroot -proot --skip-dump-date test01" > ${WORKSPACE}/examples/01-simple/export/test01.sql'
+
+                sh 'diff ${WORKSPACE}/examples/01-simple/export/mysql-users.sql ${WORKSPACE}/examples/01-simple/test/mysql-users.sql'
+                sh 'diff ${WORKSPACE}/examples/01-simple/export/test01.sql ${WORKSPACE}/examples/01-simple/test/test01.sql'
             }
         }
 
         stage('Stop docker env') {
             steps {
                 sh 'docker-compose -f docker-compose.01-import.yml -p ${JOB_NAME} stop'
+            }
+        }
+
+        stage('Build data container') {
+            steps {
+                echo "not implemented yet"
             }
         }
 
