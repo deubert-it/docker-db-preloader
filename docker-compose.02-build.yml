@@ -9,3 +9,5 @@ services:
       #MYSQL_DATABASE: ${DATABASE_NAME}
       #MYSQL_USER: ${DATABASE_USER}
       #MYSQL_PASSWORD: ${DATABASE_PASSWORD}
+    volumes:
+    - ./wait-for-it.sh:/tmp/wait-for-it.sh

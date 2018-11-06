@@ -77,6 +77,30 @@ pipeline {
             }
         }
 
+        stage('Start data container') {
+            steps {
+                sh 'docker-compose -f docker-compose.02-build.yml -p ${JOB_NAME}_build up -d'
+            }
+        }
+
+        stage('Validate preloaded output') {
+            steps {
+                sh 'docker-compose -f docker-compose.02-build.yml -p ${JOB_NAME}_build exec -T db-preloaded bash -c "chmod +x /tmp/wait-for-it.sh && /tmp/wait-for-it.sh --timeout=30 --host=localhost --port=3306"'
+
+                sh 'docker-compose -f docker-compose.02-build.yml -p ${JOB_NAME}_build exec -T db-preloaded sh -c "/usr/bin/mysqldump -uroot -proot --skip-dump-date mysql user" > ${WORKSPACE}/examples/01-simple/export/mysql-users_PRELOADED.sql'
+                sh 'docker-compose -f docker-compose.02-build.yml -p ${JOB_NAME}_build exec -T db-preloaded sh -c "/usr/bin/mysqldump -uroot -proot --skip-dump-date test01" > ${WORKSPACE}/examples/01-simple/export/test01_PRELOADED.sql'
+
+                sh 'diff ${WORKSPACE}/examples/01-simple/export/mysql-users_PRELOADED.sql ${WORKSPACE}/examples/01-simple/test/mysql-users.sql'
+                sh 'diff ${WORKSPACE}/examples/01-simple/export/test01_PRELOADED.sql ${WORKSPACE}/examples/01-simple/test/test01.sql'
+            }
+        }
+
+        stage('Stop data container') {
+            steps {
+                sh 'docker-compose -f docker-compose.02-build.yml -p ${JOB_NAME}_build stop'
+            }
+        }
+
         stage('Push data container to registry') {
             steps {
                 echo "not implemented yet"
@@ -89,6 +113,10 @@ pipeline {
             sh 'docker-compose -f docker-compose.01-import.yml -p ${JOB_NAME} logs db'
             sh 'docker-compose -f docker-compose.01-import.yml -p ${JOB_NAME} exec -T db chmod -R 0777 /var/lib/mysql'
             sh 'docker-compose -f docker-compose.01-import.yml -p ${JOB_NAME} stop'
+
+            sh 'docker-compose -f docker-compose.02-build.yml -p ${JOB_NAME}_build logs db-preloaded'
+            sh 'docker-compose -f docker-compose.02-build.yml -p ${JOB_NAME}_build stop'
+
             //mail to: support@deubert.it, subject: 'The Pipeline failed :('
         }
         always {
