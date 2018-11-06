@@ -1,12 +1,12 @@
 version: '3'
 
 services:
-  db:
-    image: mysql:5.6
+  db-preloaded:
+    image: registry.deubert.it:5000/db-databuilder/db-preloaded-01
     environment:
       MYSQL_ROOT_PASSWORD: ${DATABASE_ROOT_PASSWORD}
-      MYSQL_DATABASE: ${DATABASE_NAME}
-      MYSQL_USER: ${DATABASE_USER}
-      MYSQL_PASSWORD: ${DATABASE_PASSWORD}
+      #MYSQL_DATABASE: ${DATABASE_NAME}
+      #MYSQL_USER: ${DATABASE_USER}
+      #MYSQL_PASSWORD: ${DATABASE_PASSWORD}
     volumes:
-    - ./sql:/docker-entrypoint-initdb.d/
+    - ./wait-for-it.sh:/tmp/wait-for-it.sh
