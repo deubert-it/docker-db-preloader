@@ -1,5 +1,7 @@
-FROM alpine:latest
+FROM mysql:5.6
 
 MAINTAINER info@deubert.it
 
-COPY data /data/
+RUN rm -rf /var/lib/mysql
+
+COPY data /var/lib/mysql
