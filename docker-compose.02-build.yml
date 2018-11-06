@@ -3,4 +3,4 @@ version: '3'
 services:
   db-data:
     #image: my-registry/my-image
-    build: ./etc/Dockerfile
+    build: ./etc
