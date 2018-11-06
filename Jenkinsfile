@@ -47,7 +47,6 @@ pipeline {
             steps {
                 sh 'chmod +x ${WORKSPACE}/wait-for-it.sh'
                 sh 'docker-compose -f docker-compose.01-import.yml -p ${JOB_NAME} exec -T db bash -c "chmod +x /tmp/wait-for-it.sh && /tmp/wait-for-it.sh --timeout=30 --host=localhost --port=3306"'
-                sh 'echo fixing permissions now'
                 sh 'docker-compose -f docker-compose.01-import.yml -p ${JOB_NAME} exec -T db chmod -R 0777 /var/lib/mysql'
             }
         }
@@ -55,7 +54,8 @@ pipeline {
         stage('Validate output') {
             steps {
                 sh 'rm -f ${WORKSPACE}/examples/01-simple/export/fulldump.sql'
-                sh 'docker-compose -f docker-compose.01-import.yml -p ${JOB_NAME} exec -T db exec "mysqldump --all-databases -uroot -proot" > ${WORKSPACE}/examples/01-simple/export/fulldump.sql'
+                sh 'docker-compose -f docker-compose.01-import.yml -p ${JOB_NAME} exec -T db exec "mysqldump --all-databases -uroot -proot"'
+                sh '(docker-compose -f docker-compose.01-import.yml -p ${JOB_NAME} exec -T db exec "mysqldump --all-databases -uroot -proot") > ${WORKSPACE}/examples/01-simple/export/fulldump.sql'
             }
         }
 
