@@ -70,7 +70,10 @@ pipeline {
 
         stage('Build data container') {
             steps {
-                echo "not implemented yet"
+                sh 'rm -rf ${WORKSPACE}/etc/data'
+                sh 'mv ${WORKSPACE}/data ${WORKSPACE}/etc/'
+
+                sh 'cd ${WORKSPACE}/etc && docker build --rm --label db-data-01'
             }
         }
 
