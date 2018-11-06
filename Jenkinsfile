@@ -103,7 +103,7 @@ pipeline {
 
         stage('Push data container to registry') {
             steps {
-                echo "not implemented yet"
+                sh 'docker-compose -f docker-compose.02-build.yml -p ${JOB_NAME}_build push'
             }
         }
     }
