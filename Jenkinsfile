@@ -3,6 +3,9 @@ pipeline {
     stages {
         stage('Preparation') {
             steps {
+
+                sh 'rm -rf ${WORKSPACE}/data'
+
                 checkout([
                     $class: 'GitSCM',
                     branches: [[name: '*/master']],
