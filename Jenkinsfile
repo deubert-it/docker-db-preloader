@@ -54,8 +54,7 @@ pipeline {
         stage('Validate output') {
             steps {
                 sh 'rm -f ${WORKSPACE}/examples/01-simple/export/fulldump.sql'
-                sh 'docker-compose -f docker-compose.01-import.yml -p ${JOB_NAME} exec -T db exec "mysqldump --all-databases -uroot -proot"'
-                sh '(docker-compose -f docker-compose.01-import.yml -p ${JOB_NAME} exec -T db exec "mysqldump --all-databases -uroot -proot") > ${WORKSPACE}/examples/01-simple/export/fulldump.sql'
+                sh 'docker-compose -f docker-compose.01-import.yml -p ${JOB_NAME} exec -T db "mysqldump --all-databases -uroot -proot" > ${WORKSPACE}/examples/01-simple/export/fulldump.sql'
             }
         }
 
