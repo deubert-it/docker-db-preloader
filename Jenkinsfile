@@ -4,7 +4,7 @@ pipeline {
         stage('Preparation') {
             steps {
 
-                sh 'rm -rf ${WORKSPACE}/data'
+                sh 'sudo rm -rf ${WORKSPACE}/data'
 
                 checkout([
                     $class: 'GitSCM',
