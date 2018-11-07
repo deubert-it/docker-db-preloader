@@ -9,6 +9,6 @@ services:
       #MYSQL_USER: ${DATABASE_USER}
       #MYSQL_PASSWORD: ${DATABASE_PASSWORD}
     volumes:
-    - ./examples/01-simple/sql:/docker-entrypoint-initdb.d/
+    - ${SQL_PATH_VOLUME}:/docker-entrypoint-initdb.d/
     - ./data:/var/lib/mysql
     - ./wait-for-it.sh:/tmp/wait-for-it.sh
