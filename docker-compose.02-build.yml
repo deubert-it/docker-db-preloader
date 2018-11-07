@@ -2,7 +2,7 @@ version: '3'
 
 services:
   db-preloaded:
-    image: registry.deubert.it:5000/db-databuilder/db-preloaded-01
+    image: ${TARGET_IMAGE}
     build: ./etc
     environment:
       BASE_IMAGE: ${BASE_IMAGE}

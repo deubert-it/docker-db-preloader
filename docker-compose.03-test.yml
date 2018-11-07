@@ -2,7 +2,7 @@ version: '3'
 
 services:
   db-preloaded:
-    image: registry.deubert.it:5000/db-databuilder/db-preloaded-01
+    image: ${TARGET_IMAGE}
     environment:
       MYSQL_ROOT_PASSWORD: ${DATABASE_ROOT_PASSWORD}
       #MYSQL_DATABASE: ${DATABASE_NAME}
