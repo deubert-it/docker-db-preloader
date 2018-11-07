@@ -5,6 +5,7 @@ pipeline {
             steps {
 
                 sh 'sudo rm -rf ${WORKSPACE}/data'
+                sh 'rm -rf ${WORKSPACE}/build'
 
                 checkout([
                     $class: 'GitSCM',
@@ -16,11 +17,13 @@ pipeline {
                 ])
 
                 sh 'mkdir ${WORKSPACE}/data && chmod 0777 ${WORKSPACE}/data'
+                sh 'mkdir ${WORKSPACE}/build && chmod 0777 ${WORKSPACE}/build'
             }
         }
 
         stage('Set Dotenv config') {
             steps {
+                sh 'rm -f .env'
                 sh 'cp .env.dist .env'
             }
         }
