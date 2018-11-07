@@ -153,6 +153,7 @@ pipeline {
         }
         always {
             sh 'rm -rf data'
+            sh 'rm -rf build'
         }
     }
 }
