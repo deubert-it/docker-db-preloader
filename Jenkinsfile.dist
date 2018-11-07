@@ -21,7 +21,14 @@ pipeline {
 
         stage('Set Dotenv config') {
             steps {
-                sh 'cp .env.dist .env'
+                sh 'rm -f .env'
+                sh '''
+                    printf "DATABASE_ROOT_PASSWORD=root\n" >> .env
+                    printf "IMPORT_TIMEOUT_SECONDS=30\n" >> .env
+                    printf "BASE_IMAGE=mysql:5.6\n" >> .env
+                    printf "SQL_PATH_VOLUME=./examples/01-simple/sql\n" >> .env
+                    printf "TARGET_IMAGE=registry.deubert.it:5000/db-databuilder/db-preloaded-01\n" >> .env
+                '''
             }
         }
 
@@ -48,6 +55,9 @@ pipeline {
         stage('Wait for import completion') {
             steps {
                 sh 'chmod +x ${WORKSPACE}/wait-for-it.sh'
+                sh 'printenv'
+                sh 'docker-compose -f dock'
+
                 sh 'docker-compose -f docker-compose.01-import.yml -p ${JOB_NAME}_import exec -T db bash -c "chmod +x /tmp/wait-for-it.sh && /tmp/wait-for-it.sh --timeout=30 --host=localhost --port=3306"'
                 sh 'docker-compose -f docker-compose.01-import.yml -p ${JOB_NAME}_import exec -T db chmod -R 0777 /var/lib/mysql'
             }
@@ -58,9 +68,6 @@ pipeline {
                 sh 'rm -f ${WORKSPACE}/examples/01-simple/export/*.sql'
                 sh 'docker-compose -f docker-compose.01-import.yml -p ${JOB_NAME}_import exec -T db sh -c "/usr/bin/mysqldump -uroot -proot --skip-dump-date mysql user" > ${WORKSPACE}/examples/01-simple/export/mysql-users.sql'
                 sh 'docker-compose -f docker-compose.01-import.yml -p ${JOB_NAME}_import exec -T db sh -c "/usr/bin/mysqldump -uroot -proot --skip-dump-date test01" > ${WORKSPACE}/examples/01-simple/export/test01.sql'
-
-                sh 'diff ${WORKSPACE}/examples/01-simple/export/mysql-users.sql ${WORKSPACE}/examples/01-simple/test/mysql-users.sql'
-                sh 'diff ${WORKSPACE}/examples/01-simple/export/test01.sql ${WORKSPACE}/examples/01-simple/test/test01.sql'
             }
         }
 
