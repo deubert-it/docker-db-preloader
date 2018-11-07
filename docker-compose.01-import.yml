@@ -8,6 +8,7 @@ services:
       #MYSQL_DATABASE: ${DATABASE_NAME}
       #MYSQL_USER: ${DATABASE_USER}
       #MYSQL_PASSWORD: ${DATABASE_PASSWORD}
+      IMPORT_TIMEOUT_SECONDS: ${IMPORT_TIMEOUT_SECONDS}
     volumes:
     - ${SQL_PATH_VOLUME}:/docker-entrypoint-initdb.d/
     - ./data:/var/lib/mysql
