@@ -1,13 +1,14 @@
 <?php
 /**
- * Script to generate random testdata.
+ * Script to generate random sql testdata.
  *
  * row count <-> file size
- * -rw-r--r--  1 jenkins jenkins 1396665687 Nov  7 17:46 s10000.sql
- * -rw-r--r--  1 jenkins jenkins  139666872 Nov  7 17:45 s1000.sql
- * -rw-r--r--  1 jenkins jenkins   13966641 Nov  7 17:45 s100.sql
- * -rw-r--r--  1 jenkins jenkins    1396915 Nov  7 17:44 s10.sql
- * -rw-r--r--  1 jenkins jenkins     139872 Nov  7 17:44 s1.sql
+ *
+ * s1.sql       = 1000 rows         = 139872        = 139KB
+ * s10.sql      = 10.000 rows       = 1396915       = 1.39MB
+ * s100.sql     = 100.000 rows      = 13966641      = 13.9MB
+ * s1000.sql    = 1.000.000 rows    = 139666872     = 139MB
+ * s10000.sql   = 10.000.000 rows   = 1396665687    = 1.39GB
  */
 
 $opt = getopt('s:o:');

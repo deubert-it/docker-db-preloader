@@ -26,7 +26,7 @@ pipeline {
                 sh 'rm -f .env'
                 sh '''
                     printf "DATABASE_ROOT_PASSWORD=root\n" >> .env
-                    printf "IMPORT_TIMEOUT_SECONDS=30\n" >> .env
+                    printf "IMPORT_TIMEOUT_SECONDS=0\n" >> .env
                     printf "BASE_IMAGE=mysql:5.6\n" >> .env
                     printf "SQL_PATH_VOLUME=./examples/01-simple/sql\n" >> .env
                     printf "TARGET_IMAGE=registry.deubert.it:5000/db-databuilder/db-preloaded-01\n" >> .env
