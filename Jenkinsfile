@@ -39,7 +39,7 @@ pipeline {
 
         stage('Validate docker env') {
             steps {
-                sh 'docker ps | grep "${JOB_NAME}_db"'
+                sh 'docker ps | grep "${JOB_NAME}_import_db"'
                 sh 'docker-compose -f docker-compose.01-import.yml -p ${JOB_NAME}_import exec -T db printenv'
                 sh 'docker-compose -f docker-compose.01-import.yml -p ${JOB_NAME}_import exec -T db bash -c "printenv"'
             }
