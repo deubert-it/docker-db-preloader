@@ -4,19 +4,19 @@ Tool to create prefilled database docker containers with jenkins and docker-comp
 
 Use case: Speed up CI/CD pipelines or dev environment setups immensely by importing your data only once and saving the preloaded database container to your private registry. Reset your database state almost instantly between tests.
 
-##Concept
+## Concept
 - build and start mysql or mariadb container
 - using the docker-entrypoint, supplied sql files are executed and data imported
 - in a testing step, database content is compared between directly-after-import and from-preloaded-container stages
 - resulting data container (/var/lib/mysql content) can be pushed to registry
 
-##Example Usage:
+## Example Usage:
 1) Create new jenkins project with this repository as source
 2) Copy pipeline config from ``Jenkinsfile.dist``
 3) Adapt sql path, base and target image settings in stage "setting Dotenv config"
 4) Adapt database validation steps
 
-##Example .env:
+## Example .env:
 - see .env.dist
 - also check related base image docs:
     - https://hub.docker.com/_/mysql/
@@ -37,7 +37,7 @@ TARGET_IMAGE=registry.deubert.it:5000/db-databuilder/db-preloaded-01
 
 This example configuration will build a new container based on mysql 5.6, import all files from `./examples/01-simple/sql` and then push the preloaded db container to `registry.deubert.it:5000/db-databuilder/db-preloaded-01`.  
 
-##Todo
+## Todo
 - Improve configuration and (re-)usability
 - Move hardcoded testing configuration from Jenkinsfile to ENV config
 - Add more testcases
