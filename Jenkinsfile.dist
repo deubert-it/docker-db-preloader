@@ -153,8 +153,6 @@ pipeline {
             
             sh 'docker-compose -f docker-compose.03-test.yml -p ${JOB_NAME}_test logs db-preloaded'
             sh 'docker-compose -f docker-compose.03-test.yml -p ${JOB_NAME}_test stop'
-
-            //mail to: support@deubert.it, subject: 'The Pipeline failed :('
         }
         always {
             sh 'rm -rf data'

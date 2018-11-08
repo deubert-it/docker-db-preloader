@@ -1,13 +1,18 @@
 <?php
 /**
+ * @author Karsten Deubert <info@deubert.it>
+ *
  * Script to generate random sql testdata.
  *
  * row count <-> file size
  *
- * s1.sql       = 1000 rows         = 139872        = 139KB
- * s10.sql      = 10.000 rows       = 1396915       = 1.39MB
- * s100.sql     = 100.000 rows      = 13966641      = 13.9MB
- * s1000.sql    = 1.000.000 rows    = 139666872     = 139MB
+ * docker image size base mysql:5.6                             = 256MB
+ * docker image size example01                                  = 377MB
+ *
+ * s1.sql       = 1000 rows         = 139872        = 139KB     = 444MB
+ * s10.sql      = 10.000 rows       = 1396915       = 1.39MB    = 453MB
+ * s100.sql     = 100.000 rows      = 13966641      = 13.9MB    = 460MB
+ * s1000.sql    = 1.000.000 rows    = 139666872     = 139MB     = 528MB
  * s10000.sql   = 10.000.000 rows   = 1396665687    = 1.39GB
  */
 
