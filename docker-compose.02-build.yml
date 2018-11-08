@@ -3,7 +3,8 @@ version: '3'
 services:
   db-preloaded:
     image: ${TARGET_IMAGE}
-    build: ./etc
+    build:
+      context: ./etc
       args:
         BASE_IMAGE: ${BASE_IMAGE}
     environment:
