@@ -4,6 +4,8 @@ services:
   db-preloaded:
     image: ${TARGET_IMAGE}
     build: ./etc
+      args:
+        BASE_IMAGE: ${BASE_IMAGE}
     environment:
       BASE_IMAGE: ${BASE_IMAGE}
       MYSQL_ROOT_PASSWORD: ${DATABASE_ROOT_PASSWORD}
