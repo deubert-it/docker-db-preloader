@@ -10,6 +10,7 @@ services:
       MYSQL_PASSWORD: ${DATABASE_PASSWORD}
       IMPORT_TIMEOUT_SECONDS: ${IMPORT_TIMEOUT_SECONDS}
     volumes:
-    - ${SQL_PATH_VOLUME}:/docker-entrypoint-initdb.d/
-    - ./data:/var/lib/mysql
-    - ./wait-for-it.sh:/tmp/wait-for-it.sh
+      - ${SQL_PATH_VOLUME}:/docker-entrypoint-initdb.d/
+      - ./data:/var/lib/mysql
+      - ./save-dbinfo.sh:/tmp/save-dbinfo.sh
+      - ./wait-for-it.sh:/tmp/wait-for-it.sh
