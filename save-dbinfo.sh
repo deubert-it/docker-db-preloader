@@ -26,15 +26,15 @@ for f in ${SOURCE_DIR}/*; do
             echo -e "\tCREATE USER count: $(grep --count 'CREATE USER' ${f})" >> ${RESULT_FILE}
             echo -e "\tCREATE DATABASE/SCHEMA count: $(grep --count -e 'CREATE DATABASE' -e 'CREATE SCHEMA' ${f})" >> ${RESULT_FILE}
             echo -e "\tCREATE TABLE count: $(grep --count 'CREATE TABLE' ${f})" >> ${RESULT_FILE}
-            #echo -e "\tCREATE INDEX count: $(grep --count 'CREATE INDEX' ${f})" >> ${RESULT_FILE}
-            #echo -e "\tINSERT INTO count: $(grep --count 'INSERT INTO' ${f})" >> ${RESULT_FILE}
+            echo -e "\tCREATE INDEX count: $(grep --count 'CREATE INDEX' ${f})" >> ${RESULT_FILE}
+            echo -e "\tINSERT INTO count: $(grep --count 'INSERT INTO' ${f})" >> ${RESULT_FILE}
         else
             # we have to unzip file first
             echo -e "\tCREATE USER count: $(gunzip -c ${f} | grep --count 'CREATE USER')" >> ${RESULT_FILE}
             echo -e "\tCREATE DATABASE/SCHEMA count: $(gunzip -c ${f} | grep --count -e 'CREATE DATABASE' -e 'CREATE SCHEMA')" >> ${RESULT_FILE}
             echo -e "\tCREATE TABLE count: $(gunzip -c ${f} | grep --count 'CREATE TABLE')" >> ${RESULT_FILE}
-            #echo -e "\tCREATE INDEX count: $(gunzip -c ${f} | grep --count 'CREATE INDEX')" >> ${RESULT_FILE}
-            #echo -e "\tINSERT INTO count: $(gunzip -c ${f} | grep --count 'INSERT INTO')" >> ${RESULT_FILE}
+            echo -e "\tCREATE INDEX count: $(gunzip -c ${f} | grep --count 'CREATE INDEX')" >> ${RESULT_FILE}
+            echo -e "\tINSERT INTO count: $(gunzip -c ${f} | grep --count 'INSERT INTO')" >> ${RESULT_FILE}
         fi
     fi
 done

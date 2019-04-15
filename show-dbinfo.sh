@@ -12,6 +12,7 @@ RESULT_FILE=${1:-"/var/lib/mysql/dbinfo.txt"}
 
 if [[ -f ${RESULT_FILE} ]]; then
     cat ${RESULT_FILE}
+    echo "" # just extra new line
 else
     echo -e "\nFile ${RESULT_FILE} not found!\n"
 fi
