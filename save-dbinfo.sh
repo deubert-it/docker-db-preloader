@@ -14,7 +14,7 @@
 SOURCE_DIR=${1:-"/docker-entrypoint-initdb.d"}
 RESULT_FILE=${2:-"/var/lib/mysql/dbinfo.txt"}
 
-echo -e "Import date: $(date +%F)\n" > ${RESULT_FILE}
+echo -e "Import date: $(date '+%F %R')\n" > ${RESULT_FILE}
 echo -e "Imported files:" >> ${RESULT_FILE}
 
 for f in ${SOURCE_DIR}/*; do

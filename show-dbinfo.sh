@@ -11,6 +11,7 @@
 RESULT_FILE=${1:-"/var/lib/mysql/dbinfo.txt"}
 
 if [[ -f ${RESULT_FILE} ]]; then
+    echo "" # just extra new line
     cat ${RESULT_FILE}
     echo "" # just extra new line
 else
