@@ -1,0 +1,3 @@
+data/ib_logfile*
+/data/ib_logfile*
+/var/lib/mysql/ib_logfile*
